@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form , Row, Col } from 'react-bootstrap';
 
 const Review = ({ formData, setFormData }) => {
 
@@ -13,15 +13,26 @@ const Review = ({ formData, setFormData }) => {
         }));
       };
 
+      const renderItem = (label, value) => (
+        <Row className="mb-2 ">
+          <Col xs={4} className="fw-semibold text-start ms-3">
+            {label}:
+          </Col>
+          <Col xs={6} >{value}</Col>
+        </Row>
+      );
+
   return (
     <div>
-      <h5 className='text-center'>Review Your Information</h5>
-      <p><strong>Name:</strong> {formData.name}</p>
-      <p><strong>Email:</strong> {formData.email}</p>
-      <p><strong>Interested in Sports:</strong> {formData.interestedInSports ? 'Yes' : 'No'}</p>
-      <p><strong>Interested in Music:</strong> {formData.interestedInMusic ? 'Yes' : 'No'}</p>
-      {formData.interestedInSports && <p><strong>Favorite Sport:</strong> {formData.favoriteSport}</p>}
-      {formData.interestedInMusic && <p><strong>Instrument Played:</strong> {formData.instrumentPlayed}</p>}
+      <h5 className='text-center mb-4'>Review Your Information</h5>
+  
+{renderItem('Name', formData.name)}
+      {renderItem('Email', formData.email)}
+      {renderItem('Interested in Sports', formData.interestedInSports ? 'Yes' : 'No')}
+      {renderItem('Interested in Music', formData.interestedInMusic ? 'Yes' : 'No')}
+      {formData.interestedInSports && renderItem('Favorite Sport', formData.favoriteSport)}
+      {formData.interestedInSports && renderItem('Favorite Sportsperson', formData.favoriteSportsperson)}
+      {formData.interestedInMusic && renderItem('Instrument Played', formData.instrumentPlayed)}
 
       <Form.Check
         type="checkbox"
